@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <style>
+    body {
+      padding-top: 100px;
+      background: powderblue;
+    }
+
+    .form-signup {
+      margin: 0 auto;
+      max-width: 400px;
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+
+    }
+
+    .form-signup h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+  <div class="container">
+    <form class="form-signup">
+      <h2>Register</h2>
+      <p>Create your account.It's free only takes a minute</p>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <input type="text" name="firstname" class="form-control" id="firstname" placeholder="First name" onclick="validateName()">
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Last name" onclick="validateLastname()">
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-3">
+        <input type="email" name="email" class="form-control" id="email" placeholder="Email Address" oninput="validateEmail()">
+      </div>
+      <div class="form-group mb-3">
+        <input type="date" name="date" class="form-control"  id="dob" placeholder="Date of Birth" oninput="validateDateOfBirth()"">
+      </div>
+      <div class="form-group mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Password" id="password" oninput="validatePassword()">
+      </div>
+      <div class="form-group mb-3">
+        <input type="password" name="confirm_password" class="form-control"id="confirm_password" placeholder="Confirm Password">
+      </div>
+      <div class="form-group mb-3">
+        <label>
+          <input type="checkbox" name="checkbox">
+          I accept the<a href="#">Terms of use</a> & <a href="#">Privacy Policy</a>
+        </label>
+      </div>
+      <div class="form-group d-flex justify-content-center">
+        <input type="submit" class="btn btn-primary btn-block" name="" value="Submit">
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function validateEmail() {
+        var emailInput = document.getElementById("email").value;
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var emailField = document.getElementById("email");
+
+        if (emailPattern.test(emailInput)) {
+            emailField.classList.remove("is-invalid");
+            emailField.classList.add("is-valid");
+        } else {
+            emailField.classList.remove("is-valid");
+            emailField.classList.add("is-invalid");
+        }
+    }
+
+    function validateName() {
+        var nameInput = document.getElementById("firstname").value;
+        var namePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+        var nameField = document.getElementById("firstname");
+
+        if (namePattern.test(nameInput)) {
+            nameField.classList.remove("is-invalid");
+            nameField.classList.add("is-valid");
+        } else {
+            nameField.classList.remove("is-valid");
+            nameField.classList.add("is-invalid");
+        }
+    }
+
+    function validateLastName() {
+        var nameInput = document.getElementById("lastname").value;
+        var namePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+        var nameField = document.getElementById("lastname");
+
+        if (namePattern.test(nameInput)) {
+            nameField.classList.remove("is-invalid");
+            nameField.classList.add("is-valid");
+        } else {
+            nameField.classList.remove("is-valid");
+            nameField.classList.add("is-invalid");
+        }
+    }
+
+    function validatePassword() {
+        var passwordInput = document.getElementById("password").value;
+        var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        var passwordField = document.getElementById("password");
+
+        if (passwordPattern.test(passwordInput)) {
+            passwordField.classList.remove("is-invalid");
+            passwordField.classList.add("is-valid");
+        } else {
+            passwordField.classList.remove("is-valid");
+            passwordField.classList.add("is-invalid");
+        }
+    }
+
+    function validateDateOfBirth() {
+        var dobInput = document.getElementById("dob").value;
+        var dobPattern = /^(\d{4})-(\d{2})-(\d{2})$/;
+        var today = new Date();
+        var dobDate = new Date(dobInput);
+        var dobField = document.getElementById("dob");
+
+        if (
+            dobPattern.test(dobInput) &&
+            dobDate <= today &&
+            today.getFullYear() - dobDate.getFullYear() >= 18
+        ) {
+            dobField.classList.remove("is-invalid");
+            dobField.classList.add("is-valid");
+        } else {
+            dobField.classList.remove("is-valid");
+            dobField.classList.add("is-invalid");
+        }
+    }
+
+    function validateForm() {
+  var passwordInput = document.getElementById("password").value;
+  var confirmInput = document.getElementById("confirm_password").value;
+  
+  var passwordField = document.getElementById("password");
+  var confirmField = document.getElementById("confirm_password");
+  
+  if (passwordInput !== confirmInput) {
+    // If the passwords don't match, show an error message and mark both fields as invalid
+    passwordField.classList.remove("is-valid");
+    passwordField.classList.add("is-invalid");
+    confirmField.classList.remove("is-valid");
+    confirmField.classList.add("is-invalid");
+    return false;
+  }
+
+  // If the passwords match, mark both fields as valid
+  passwordField.classList.remove("is-invalid");
+  passwordField.classList.add("is-valid");
+  confirmField.classList.remove("is-invalid");
+  confirmField.classList.add("is-valid");
+
+  // If the passwords match, the form will be submitted
+  return true;
+}
+
+    document.getElementById("email").addEventListener("input", validateEmail);
+    document.getElementById("firstname").addEventListener("input", validateName);
+    document.getElementById("lastname").addEventListener("input", validateLastName);
+    document.getElementById("password").addEventListener("input", validatePassword);
+    document.getElementById("confirm_password").addEventListener("input", validateForm);
+    document.getElementById("dob").addEventListener("input", validateDateOfBirth);
+    </script>
+
+  
+</body>
+
+</html>
